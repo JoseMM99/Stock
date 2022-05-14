@@ -29,4 +29,8 @@ class People extends Eloquent
         'updated_at',
         'deleted_at'
     ];
+
+    public function user(){
+        return $this->hasOne(User::class);
+    }
 }

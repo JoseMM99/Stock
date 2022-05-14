@@ -20,6 +20,10 @@ class CreateUsersTable extends Migration
             $table->string('email',60)->unique();
             $table->string('password',16);
             $table->string('validation',10);
+            
+            $table->unsignedBigInteger('people_id');
+            $table->foreign('people_id')->references('id')->on('people');
+            
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
