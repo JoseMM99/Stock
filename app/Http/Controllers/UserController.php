@@ -120,7 +120,6 @@ class UserController extends Controller
                 $request->get('phone'),
                 $request->get('curp'),
                 $request->get('rfc'),
-
             );
             
             $user = $this->user_repository->create(

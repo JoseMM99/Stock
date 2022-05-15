@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 
 
 /*
@@ -27,6 +28,10 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::put('user/update/{uuid}',[UserController::class, 'update']);
     Route::get('user/edit/{uuid}',[UserController::class, 'edit']);
     Route::delete('user/delete/{uuid}',[UserController::class, 'delete']);
+
+    //Productos
+    Route::post('product',[ProductController::class, 'register']);
 });
+
 
 
