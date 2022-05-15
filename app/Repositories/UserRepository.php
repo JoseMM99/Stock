@@ -4,7 +4,7 @@ use App\Models\User;
 
 class UserRepository{
 
-    public function create($uuid, $name, $lastNameP, $lastNameM, $email, $password, $validation, $people_id, $rol_id){
+    public function create($uuid, $name, $lastNameP, $lastNameM, $email, $password, $validation, $people_id){
         $user['uuid'] = $uuid;
         $user['name'] = $name.' '.$lastNameP.' '.$lastNameM;
         $user['email'] = $email;
@@ -14,10 +14,9 @@ class UserRepository{
         return User::create($user);
     }
 
-    public function update($uuid, $name, $lastNameP, $lastNameM,  $email, $password){
+    public function update($uuid, $name, $lastNameP, $lastNameM, $password){
         $user = $this->find($uuid);
         $user->name = $name .' '.$lastNameP.' '. $lastNameM;
-        $user->email = $email;        
         $user->password = $password;
         $user->save();
         return $user;

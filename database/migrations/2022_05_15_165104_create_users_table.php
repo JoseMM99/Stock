@@ -18,15 +18,12 @@ class CreateUsersTable extends Migration
             $table->uuid('uuid');
             $table->string('name',35);
             $table->string('email',60)->unique();
-            $table->string('password',16);
+            $table->string('password');
             $table->string('validation',10);
             $table->rememberToken();
             
             $table->unsignedBigInteger('people_id');
             $table->foreign('people_id')->references('id')->on('people');
-            
-            $table->unsignedBigInteger('rol_id');
-            $table->foreign('rol_id')->references('id')->on('roles');
             
             $table->timestamps();
             $table->softDeletes();

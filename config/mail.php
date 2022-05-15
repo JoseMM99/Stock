@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'smtp'),
+    'default' => 'smtp',
 
     /*
     |--------------------------------------------------------------------------
@@ -36,11 +36,11 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
-            'port' => env('MAIL_PORT', 587),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
+            'host' => 'smtp.gmail.com',
+            'port' => 587,
+            'encryption' => 'tls',
+            'username' => '20183l301014@utcv.edu.mx',
+            'password' => 'ezhmvcpmkydsehtq',
             'timeout' => null,
             'auth_mode' => null,
         ],
@@ -107,12 +107,12 @@ return [
     |
     */
 
-    'markdown' => [
-        'theme' => 'default',
-
-        'paths' => [
-            resource_path('views/vendor/mail'),
+    'stream'=> [
+        'ssl' => [
+            'allow_self_signed' => true, //Permite certificado auto-firmado de ssl
+            'verify_peer' => false, // Por defecto se pide el certificado de ssl a utilizar pero como sera de manera local se deja en false
+            'verify_peer_name' => false,// Por defecto requiere la certificación del nombre pero como sera de manera local se deja en false
         ],
-    ],
+    ]
 
 ];
