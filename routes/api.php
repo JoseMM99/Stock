@@ -16,17 +16,17 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::post('login',[UserController::class, 'authenticate']);
 Route::get('validar',[UserController::class, 'validation']);
-
-Route::get('Authenticate',[UserController::class, 'getAuthenticatedUser']);
 Route::post('user',[UserController::class, 'register']);
-Route::get('user/list',[UserController::class, 'list']);
-Route::put('user/update/{uuid}',[UserController::class, 'update']);
-Route::get('user/edit/{uuid}',[UserController::class, 'edit']);
-Route::delete('user/delete/{uuid}',[UserController::class, 'delete']);
+
+Route::group(['middleware' => ['jwt.verify']], function() {
+    //Empleados
+    Route::get('Authenticate',[UserController::class, 'getAuthenticatedUser']);
+    Route::get('user/list',[UserController::class, 'list']);
+    Route::put('user/update/{uuid}',[UserController::class, 'update']);
+    Route::get('user/edit/{uuid}',[UserController::class, 'edit']);
+    Route::delete('user/delete/{uuid}',[UserController::class, 'delete']);
+});
+
 
