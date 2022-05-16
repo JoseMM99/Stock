@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->uuid('uuid');
             $table->string('sku');
-            $table->string('nombre_producto',16)->unique();
+            $table->string('nombre_producto',60)->unique();
             $table->integer('precio');
             $table->boolean('estado')->default(1);
 

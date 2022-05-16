@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('validation',10);
             $table->rememberToken();
-            
+
             $table->unsignedBigInteger('people_id');
             $table->foreign('people_id')->references('id')->on('people');
             

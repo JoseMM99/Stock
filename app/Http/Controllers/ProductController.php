@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use App\Repositories\ProductRepository;
 use App\Repositories\UserRepository;
 use App\Models\User;
@@ -25,16 +26,15 @@ class ProductController extends Controller
     public function register(Request $request){
         $validator = Validator::make($request->all(),[
             'sku' => 'required|string',
-            'nombre_producto' => 'required|string|min:1|max:60',
+            'nombre_producto' => 'required|string|max:60',
             'cantidad' => 'required|integer|min:1',
             'precio' => 'required|integer',
             'estado' => 'required|boolean',
-            'user_id' => 'required|numeric',
         ]);
 
 
         if($validator->fails()){
-            Log::warning('ProductController - register - Falta un campo por llenar');
+            //Log::warning('ProductController - register - Falta un campo por llenar');
             return response()->json($validator->errors()->toJson(), 400);
         }
         try{
@@ -45,17 +45,17 @@ class ProductController extends Controller
                 $request->get('cantidad'),
                 $request->get('precio'),
                 $request->get('estado'),
-                $request->get('user_id')
+                $data = User::with('user')->findOrFail(Auth::id()) 
             );
 
             //var_dump($product);
             //die();
             
-            Log::info('ProductController - register - Se creó un nuevo producto');
+            //Log::info('ProductController - register - Se creó un nuevo producto');
             return response()->json(compact('product'),201);
 
         }catch(\Exception $ex){
-            Log::emergency('ProductController - register - Ocurrio un error');
+            //Log::emergency('ProductController - register - Ocurrio un error');
             return response()->json(['error'=>$ex->getMessage()]);
         }
     }
